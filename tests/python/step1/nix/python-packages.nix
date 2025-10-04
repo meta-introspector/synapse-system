@@ -1,5 +1,5 @@
 # This file would contain your Python package definitions, e.g.:
-{ pkgs }: {
+{ pkgs, lib ? pkgs.lib }: {
   # example:
   # requests = pkgs.python3Packages.requests;
 }

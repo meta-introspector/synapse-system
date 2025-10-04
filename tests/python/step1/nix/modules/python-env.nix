@@ -1,6 +1,7 @@
 {
   pkgs,
-  pythonPackagesFile,
+  lib ? pkgs.lib,
+  pythonPackagesFile ? null,
 }:
 
 let
