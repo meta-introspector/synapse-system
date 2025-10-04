@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
-    agent.url = "path:./nix/flakes/agent"; # Reference the sub-flake
+    agent.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/agent";
   };
 
   outputs = { self, nixpkgs, flake-utils, pip2nix, agent, ... }:

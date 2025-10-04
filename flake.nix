@@ -11,11 +11,11 @@
 
     # Agent flakes
     #AGENT1.url = "github:meta-introspector/synapse-system?dir=nix/flakes/4QZero&ref=feature/base-agent-flake";
-    Agent4QZero.url = "path:./nix/flakes/4QZero";
-    ARCHITECT.url = "path:./nix/flakes/architect";
+    Agent4QZero.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/4QZero";
+    ARCHITECT.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/architect";
     #ARCHITECT.url = "github:meta-introspector/synapse-system?dir=nix/flakes/architect&ref=feature/base-agent-flake";
     #base-agent.url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
-    #base-agent.url = "path:./nix/flakes/base-agent";
+
   };
 
   outputs = { self, nixpkgs, flake-utils, pip2nix, Agent4QZero, ARCHITECT
