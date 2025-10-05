@@ -9,7 +9,6 @@ set -e
 
 # Configuration
 SYNAPSE_ROOT="$HOME/.synapse-system/.synapse"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors for output
 RED='\033[0;31m'
@@ -211,7 +210,8 @@ copy_synapse_core() {
 create_project_config() {
     local target_dir="$1"
     local language="$2"
-    local project_name="$(basename "$(realpath "$target_dir")")"
+    local project_name
+    project_name="$(basename "$(realpath "$target_dir")")"
 
     log "Creating project configuration"
 

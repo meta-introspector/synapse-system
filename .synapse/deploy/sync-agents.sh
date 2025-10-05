@@ -24,7 +24,7 @@ mkdir -p "$CLAUDE_AGENTS_DIR"
 # Copy all agent definitions from .synapse/agents to .claude/agents
 if cp -f "$SYNAPSE_AGENTS_DIR"/*.md "$CLAUDE_AGENTS_DIR"/; then
     echo "Agents synced successfully from $SYNAPSE_AGENTS_DIR to $CLAUDE_AGENTS_DIR"
-    echo "Synced $(ls "$CLAUDE_AGENTS_DIR"/*.md 2>/dev/null | wc -l) agent files"
+    echo "Synced $(find "$CLAUDE_AGENTS_DIR" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l) agent files"
 else
     echo "Error: Failed to sync agents"
     exit 1

@@ -103,6 +103,7 @@ install_dependencies() {
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             curl -LsSf https://astral.sh/uv/install.sh | sh
             # Re-source shell profile to make uv available
+            # shellcheck disable=SC1091
             source "$HOME/.cargo/env"
             success "'uv' has been installed."
         else
@@ -165,9 +166,11 @@ setup_cli() {
     fi
 
     if ! grep -q "$SCRIPT_DIR/bin" "$shell_profile" 2>/dev/null; then
-        echo "" >> "$shell_profile"
-        echo "# Synapse CLI" >> "$shell_profile"
-        echo "$export_line" >> "$shell_profile"
+        {
+            echo ""
+            echo "# Synapse CLI"
+            echo "$export_line"
+        } >> "$shell_profile"
         success "Added synapse to PATH in $shell_profile"
         log "Restart your terminal or run: source $shell_profile"
     else

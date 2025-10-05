@@ -8,7 +8,6 @@ set -e
 
 # Configuration
 SYNAPSE_ROOT="$HOME/.synapse-system/.synapse"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors for output
 RED='\033[0;31m'
@@ -109,7 +108,8 @@ analyze_project() {
     local project_dir="$1"
     local language="$2"
 
-    local project_name=$(basename "$(realpath "$project_dir")")
+    local project_name
+    project_name=$(basename "$(realpath "$project_dir")")
     local description=""
     local features=""
 
@@ -186,9 +186,12 @@ setup_claude_code_directory() {
     local project_info
     project_info=$(analyze_project "$project_dir" "$language")
 
-    local project_name=$(echo "$project_info" | cut -d'|' -f1)
-    local description=$(echo "$project_info" | cut -d'|' -f2)
-    local features=$(echo "$project_info" | cut -d'|' -f3)
+    local project_name
+    project_name=$(echo "$project_info" | cut -d'|' -f1)
+    local description
+    description=$(echo "$project_info" | cut -d'|' -f2)
+    local features
+    features=$(echo "$project_info" | cut -d'|' -f3)
 
     # Create specialized agent for this project
     cat > "$claude_dir/agents/${language}-specialist.md" << EOF
@@ -229,7 +232,7 @@ You have access to the project's synapse knowledge base located at \`.synapse/\`
 Search the project's knowledge base for implementation guidance.
 
 Examples for this ${language} project:
-- \`SynapseSearch "${features//,/ patterns"} patterns ${language}"\` - Find relevant patterns
+- \`SynapseSearch "${features//,/ patterns } patterns ${language}"\` - Find relevant patterns
 - \`SynapseSearch "testing strategy ${language}"\` - Get testing guidance
 - \`SynapseSearch "error handling ${language}"\` - Find error handling patterns
 
@@ -385,8 +388,10 @@ setup_project() {
     local project_info
     project_info=$(analyze_project "$project_dir" "$language")
 
-    local auto_description=$(echo "$project_info" | cut -d'|' -f2)
-    local auto_features=$(echo "$project_info" | cut -d'|' -f3)
+    local auto_description
+    auto_description=$(echo "$project_info" | cut -d'|' -f2)
+    local auto_features
+    auto_features=$(echo "$project_info" | cut -d'|' -f3)
 
     # Use provided or detected info
     description="${description:-$auto_description}"
@@ -397,6 +402,7 @@ setup_project() {
 
     # Run initial ingestion to populate knowledge
     log "Ingesting project documentation..."
+    # shellcheck disable=SC1091,SC2015
     if command -v uv >/dev/null 2>&1; then
         (cd "$project_dir/.synapse" && source .venv/bin/activate && python ingest.py 2>/dev/null || true)
     fi

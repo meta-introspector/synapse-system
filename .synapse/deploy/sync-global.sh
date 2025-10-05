@@ -1,14 +1,9 @@
 #!/bin/bash
-# Synapse Global Sync Script
-# ==========================
-#
-# Syncs knowledge between global synapse and project-local instances
+# Synapse System Global Sync Script
+# =================================
+# This script synchronizes global Synapse configurations and tools.
 
 set -e
-
-# Configuration
-SYNAPSE_ROOT="$HOME/.synapse-system"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors for output
 RED='\033[0;31m'
@@ -146,7 +141,8 @@ pull_global_knowledge() {
     fi
 
     # Update sync metadata
-    local sync_metadata="{
+    local sync_metadata
+    sync_metadata="{
         \"last_pull\": \"$(date -Iseconds)\",
         \"global_version\": \"2.0.0\",
         \"language\": \"$language\"
@@ -185,7 +181,8 @@ push_project_knowledge() {
     # Check for custom instructions
     if [[ -d "$synapse_path/instructions" ]]; then
         while IFS= read -r -d '' file; do
-            local basename=$(basename "$file")
+            local basename
+            basename=$(basename "$file")
             local global_equivalent="$SYNAPSE_ROOT/languages/$language/instructions/$basename"
 
             if [[ ! -f "$global_equivalent" ]]; then
@@ -197,7 +194,8 @@ push_project_knowledge() {
     # Check for custom standards
     if [[ -d "$synapse_path/standards" ]]; then
         while IFS= read -r -d '' file; do
-            local basename=$(basename "$file")
+            local basename
+            basename=$(basename "$file")
             local global_equivalent="$SYNAPSE_ROOT/languages/$language/standards/$basename"
 
             if [[ ! -f "$global_equivalent" ]]; then
