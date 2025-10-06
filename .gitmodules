@@ -7,3 +7,6 @@
 [submodule "vendor/nix/pynixify"]
 	path = vendor/nix/pynixify
 	url = https://github.com/cript0nauta/pynixify
+[submodule "vendor/nix/dream2nix"]
+	path = vendor/nix/dream2nix
+	url = https://github.com/meta-introspector/dream2nix
