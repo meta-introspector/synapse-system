@@ -18,7 +18,7 @@
 
       in
       {
-        pythonEnv = pythonEnv; # Expose the Python environment
+        inherit pythonEnv; # Expose the Python environment
       }
     );
 }

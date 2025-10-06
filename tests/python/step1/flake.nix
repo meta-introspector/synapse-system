@@ -26,7 +26,7 @@
         packages = rec {
           test-agent = (import agent {
             inherit self nixpkgs flake-utils;
-            pythonEnv = pythonEnv; # Pass pythonEnv derivation directly
+            inherit pythonEnv; # Pass pythonEnv derivation directly
           }).packages.${system}.default;
         };
 
