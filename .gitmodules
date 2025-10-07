@@ -10,3 +10,6 @@
 [submodule "vendor/nix/dream2nix"]
 	path = vendor/nix/dream2nix
 	url = https://github.com/meta-introspector/dream2nix
+[submodule "vendor/nix/uv2nix"]
+	path = vendor/nix/uv2nix
+	url = https://github.com/meta-introspector/uv2nix
